@@ -1,14 +1,14 @@
 "use client"
 
 import {
-  BookOpen,
-  Bot,
   Frame,
   GalleryVerticalEnd,
+  LayoutDashboard,
   Map,
   PieChart,
-  Settings2,
-  SquareTerminal,
+  ShoppingBag,
+  Store,
+  Truck,
 } from "lucide-react"
 import * as React from "react"
 
@@ -29,99 +29,92 @@ import {
 // This is sample data.
 const data = {
   user: {
-    name: "shadcn",
-    email: "m@example.com",
+    name: "TuanNDH",
+    email: "tuanndh@ascvn.com.vn",
     avatar: "/avatars/shadcn.jpg",
   },
-  teams: [
-    {
-      name: "Acme Inc",
-      logo: GalleryVerticalEnd,
-      plan: "Enterprise",
-    },
-  ],
   navMain: [
     {
-      title: "Playground",
+      title: "Tổng quan kinh doanh", // Thay cho Playground
       url: "#",
-      icon: SquareTerminal,
+      icon: LayoutDashboard, // Đổi icon cho hợp với Ecommerce
       isActive: true,
       items: [
         {
-          title: "History",
+          title: "Báo cáo doanh thu",
           url: "#",
         },
         {
-          title: "Starred",
+          title: "Hiệu suất bán hàng",
           url: "#",
         },
         {
-          title: "Settings",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Models",
-      url: "#",
-      icon: Bot,
-      items: [
-        {
-          title: "Genesis",
-          url: "#",
-        },
-        {
-          title: "Explorer",
-          url: "#",
-        },
-        {
-          title: "Quantum",
+          title: "Xu hướng thị trường",
           url: "#",
         },
       ],
     },
     {
-      title: "Documentation",
+      title: "Quản lý sản phẩm", // Thay cho Models
       url: "#",
-      icon: BookOpen,
+      icon: ShoppingBag,
       items: [
         {
-          title: "Introduction",
+          title: "Danh sách sản phẩm",
           url: "#",
         },
         {
-          title: "Get Started",
+          title: "Danh mục & Thương hiệu",
           url: "#",
         },
         {
-          title: "Tutorials",
-          url: "#",
-        },
-        {
-          title: "Changelog",
+          title: "Quản lý kho hàng",
           url: "#",
         },
       ],
     },
     {
-      title: "Settings",
+      title: "Đơn hàng & Vận chuyển", // Thay cho Documentation
       url: "#",
-      icon: Settings2,
+      icon: Truck,
       items: [
         {
-          title: "General",
+          title: "Đơn hàng mới",
           url: "#",
         },
         {
-          title: "Team",
+          title: "Xử lý & Hoàn đơn",
           url: "#",
         },
         {
-          title: "Billing",
+          title: "Đối soát vận chuyển",
           url: "#",
         },
         {
-          title: "Limits",
+          title: "Khiếu nại / Hoàn tiền",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Cấu hình cửa hàng", // Thay cho Settings chung chung
+      url: "#",
+      icon: Store,
+      items: [
+        {
+          title: "Thông tin shop",
+          url: "#",
+        },
+        {
+          title: "Phân quyền nhân viên",
+          url: "#",
+        },
+        {
+          title: "Cổng thanh toán",
+          url: "#",
+        },
+        {
+          title: "Cài đặt phí ship",
           url: "#",
         },
       ],

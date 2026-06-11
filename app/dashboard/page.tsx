@@ -1,3 +1,5 @@
+import { Home, LayoutDashboard } from "lucide-react"
+
 import { PageBreadcrumb } from "@/components/page-breadcrumb"
 
 export default function Page() {
@@ -5,8 +7,8 @@ export default function Page() {
     <div className="space-y-6 p-4">
       <PageBreadcrumb
         items={[
-          { title: "Home", href: "/" },
-          { title: "Dashboard", current: true },
+          { title: "Home", href: "/", icon: Home },
+          { title: "Dashboard", current: true, icon: LayoutDashboard },
         ]}
       />
 
