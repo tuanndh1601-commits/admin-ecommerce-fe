@@ -56,12 +56,12 @@ const data = {
     },
     {
       title: "Quản lý sản phẩm", // Thay cho Models
-      url: "#",
+      url: "/products",
       icon: ShoppingBag,
       items: [
         {
           title: "Danh sách sản phẩm",
-          url: "#",
+          url: "/products",
         },
         {
           title: "Danh mục & Thương hiệu",

@@ -31,7 +31,7 @@ export function NavMain({
   const [openIndex, setOpenIndex] = useState<number | null>(
     initialOpenIndex === -1 ? null : initialOpenIndex
   )
-  const { state } = useSidebar()
+  const { state, toggleSidebar } = useSidebar()
   const contentRefs = useRef<Array<HTMLDivElement | null>>([])
   const [contentHeights, setContentHeights] = useState<number[]>([])
 
@@ -61,9 +61,16 @@ export function NavMain({
                 type="button"
                 tooltip={item.title}
                 aria-expanded={hasSubItems ? isOpen : undefined}
-                onClick={() =>
-                  hasSubItems && setOpenIndex(isOpen ? null : index)
-                }
+                onClick={() => {
+                  if (state === "collapsed") {
+                    toggleSidebar()
+                    if (hasSubItems) {
+                      setOpenIndex(index)
+                    }
+                  } else if (hasSubItems) {
+                    setOpenIndex(isOpen ? null : index)
+                  }
+                }}
               >
                 {item.icon && <item.icon />}
                 <span>{item.title}</span>

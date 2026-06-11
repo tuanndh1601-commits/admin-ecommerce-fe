@@ -1,17 +1,6 @@
-import { Home, LayoutDashboard } from "lucide-react"
-
-import { PageBreadcrumb } from "@/components/page-breadcrumb"
-
 export default function Page() {
   return (
     <div className="space-y-6 p-4">
-      <PageBreadcrumb
-        items={[
-          { title: "Home", href: "/", icon: Home },
-          { title: "Dashboard", current: true, icon: LayoutDashboard },
-        ]}
-      />
-
       <div className="flex flex-col gap-3">
         <div className="flex flex-col gap-1">
           <p className="text-sm font-semibold text-foreground">Dashboard</p>
