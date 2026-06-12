@@ -100,7 +100,7 @@ export function ProductExport({ data }: ProductExportProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="outline" size="sm" className="gap-2">
+        <Button variant="outline" className="shadow-sm">
           <Download className="h-4 w-4" />
           Xuất dữ liệu
         </Button>

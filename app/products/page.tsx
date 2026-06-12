@@ -223,9 +223,9 @@ export default function ProductsPage() {
         </h1>
         <div className="flex gap-2">
           <ProductExport data={filteredProducts} />
-          <Button asChild size="sm">
+          <Button className="shadow-sm" asChild>
             <Link href="/products/add">
-              <Plus />
+              <Plus className="h-4 w-4" />
               Thêm sản phẩm
             </Link>
           </Button>
