@@ -17,6 +17,7 @@ import { ProductPagination } from "@/components/products/product-pagination"
 import { ProductTable } from "@/components/products/product-table"
 import { Button } from "@/components/ui/button"
 import { Product, mockProducts } from "@/lib/mock-products"
+import Link from "next/link"
 
 export default function ProductsPage() {
   const router = useRouter()
@@ -222,9 +223,11 @@ export default function ProductsPage() {
         </h1>
         <div className="flex gap-2">
           <ProductExport data={filteredProducts} />
-          <Button onClick={handleCreate} className="gap-2">
-            <Plus className="h-4 w-4" />
-            Thêm sản phẩm
+          <Button asChild size="sm">
+            <Link href="/products/add">
+              <Plus />
+              Thêm sản phẩm
+            </Link>
           </Button>
         </div>
       </div>

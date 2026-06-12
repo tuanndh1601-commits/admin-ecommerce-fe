@@ -193,7 +193,7 @@ export function ProductTable({
       <div className="overflow-hidden rounded-lg border">
         <Table>
           <TableHeader>
-            <TableRow>
+            <TableRow className="">
               <TableHead className="w-12">
                 <Checkbox
                   checked={
@@ -203,14 +203,16 @@ export function ProductTable({
                   onCheckedChange={(checked) => onSelectAll(checked as boolean)}
                 />
               </TableHead>
-              <TableHead>Tên sản phẩm</TableHead>
-              <TableHead>SKU</TableHead>
+              <TableHead className="">Thao tác</TableHead>
+              <TableHead className="hidden md:table-cell">
+                Tên sản phẩm
+              </TableHead>
+              <TableHead className="hidden md:table-cell">SKU</TableHead>
               <TableHead className="hidden md:table-cell">Danh mục</TableHead>
               <TableHead className="hidden sm:table-cell">Giá</TableHead>
               <TableHead className="hidden lg:table-cell">Tồn kho</TableHead>
               <TableHead className="hidden xl:table-cell">Trạng thái</TableHead>
               <TableHead className="hidden xl:table-cell">Ngày tạo</TableHead>
-              <TableHead className="text-right">Thao tác</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -240,6 +242,33 @@ export function ProductTable({
                         checked={isSelected}
                         onCheckedChange={() => onSelectRow(product.id)}
                       />
+                    </TableCell>
+                    <TableCell className="">
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            className="h-8 w-8 p-0"
+                          >
+                            <MoreHorizontal className="h-4 w-4" />
+                          </Button>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent align="end">
+                          <DropdownMenuItem onClick={() => onEdit(product)}>
+                            <Edit2 className="mr-2 h-4 w-4" />
+                            Chỉnh sửa
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem
+                            onClick={() => onDelete(product)}
+                            className="text-red-600 dark:text-red-400"
+                          >
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Xóa
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     </TableCell>
                     <TableCell className="max-w-xs font-medium">
                       <button
@@ -274,7 +303,7 @@ export function ProductTable({
                       {formatCurrency(product.price)}
                     </TableCell>
                     <TableCell className="hidden lg:table-cell">
-                      <div className="flex items-center gap-2">
+                      <div className="flex gap-2">
                         {isOutOfStock ? (
                           <Badge
                             variant="outline"
@@ -287,12 +316,12 @@ export function ProductTable({
                             variant="outline"
                             className="border-orange-300 bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-400"
                           >
-                            Sắp hết
+                            {product.stock}
                           </Badge>
                         ) : (
                           <Badge
                             variant="outline"
-                            className="border-green-300 bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400"
+                            className="border-green-300 bg-green-100 align-middle text-green-800 dark:bg-green-900/30 dark:text-green-400"
                           >
                             {product.stock}
                           </Badge>
@@ -306,33 +335,6 @@ export function ProductTable({
                     </TableCell>
                     <TableCell className="hidden text-sm xl:table-cell">
                       {formatDate(product.createdAt)}
-                    </TableCell>
-                    <TableCell className="text-right">
-                      <DropdownMenu>
-                        <DropdownMenuTrigger asChild>
-                          <Button
-                            variant="ghost"
-                            size="sm"
-                            className="h-8 w-8 p-0"
-                          >
-                            <MoreHorizontal className="h-4 w-4" />
-                          </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                          <DropdownMenuItem onClick={() => onEdit(product)}>
-                            <Edit2 className="mr-2 h-4 w-4" />
-                            Chỉnh sửa
-                          </DropdownMenuItem>
-                          <DropdownMenuSeparator />
-                          <DropdownMenuItem
-                            onClick={() => onDelete(product)}
-                            className="text-red-600 dark:text-red-400"
-                          >
-                            <Trash2 className="mr-2 h-4 w-4" />
-                            Xóa
-                          </DropdownMenuItem>
-                        </DropdownMenuContent>
-                      </DropdownMenu>
                     </TableCell>
                   </TableRow>
                 )

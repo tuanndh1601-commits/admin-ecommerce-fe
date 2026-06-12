@@ -1,6 +1,6 @@
 "use client"
 
-import { ChevronDown, FilterX, X } from "lucide-react"
+import { ChevronDown, FilterX, SlidersHorizontal, X } from "lucide-react"
 import { useEffect, useState } from "react"
 
 import { Button } from "@/components/ui/button"
@@ -20,6 +20,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover"
 
 export interface FilterConfig {
   searchName: string
@@ -123,7 +124,7 @@ export function ProductFilter({
     <div className="space-y-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
         {/* Search Input */}
-        <div className="flex-1">
+        <div className="w-80">
           <Input
             placeholder="Tìm kiếm sản phẩm..."
             value={filters.searchName}
@@ -197,78 +198,85 @@ export function ProductFilter({
               ))}
             </DropdownMenuContent>
           </DropdownMenu>
+          <Popover>
+            {/* Advanced Filter Button */}
+            <PopoverTrigger asChild>
+              <Button
+                variant={isAdvanced ? "default" : "outline"}
+                size="sm"
+                className="gap-2"
+                onClick={() => setIsAdvanced(!isAdvanced)} // Giữ lại state nếu bạn cần xử lý logic khác, hoặc bỏ hẳn nếu chỉ cần đóng/mở
+              >
+                <SlidersHorizontal className="h-4 w-4" />
+                Nâng cao
+              </Button>
+            </PopoverTrigger>
+            {/* Khung nội dung Dropdown đổ xuống */}
+            <PopoverContent align="end" className="w-[350px] p-4 sm:w-[450px]">
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* Stock Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Tồn kho</label>
+                  <Select
+                    value={filters.stock}
+                    onValueChange={handleStockChange}
+                  >
+                    <SelectTrigger className="h-9 w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent position="popper" side="bottom">
+                      <SelectItem value="all">Tất cả</SelectItem>
+                      <SelectItem value="low">Sắp hết (&lt; 50)</SelectItem>
+                      <SelectItem value="out">Hết hàng</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
 
-          {/* Advanced Filter Button */}
-          <Button
-            variant={isAdvanced ? "default" : "outline"}
-            size="sm"
-            onClick={() => setIsAdvanced(!isAdvanced)}
-          >
-            Nâng cao
-          </Button>
+                {/* Hot Products Filter */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">
+                    Sản phẩm nổi bật
+                  </label>
+                  <Select value={filters.isHot} onValueChange={handleHotChange}>
+                    <SelectTrigger className="h-9 w-full">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent position="popper" side="bottom">
+                      <SelectItem value="all">Tất cả</SelectItem>
+                      <SelectItem value="true">Nổi bật</SelectItem>
+                      <SelectItem value="false">Thường</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Min Price */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Giá từ</label>
+                  <Input
+                    type="number"
+                    placeholder="0"
+                    value={filters.priceRange[0]}
+                    onChange={(e) => handlePriceChange("min", e.target.value)}
+                    className="h-9"
+                  />
+                </div>
+
+                {/* Max Price */}
+                <div className="space-y-2">
+                  <label className="text-sm font-medium">Giá đến</label>
+                  <Input
+                    type="number"
+                    placeholder="2000000"
+                    value={filters.priceRange[1]}
+                    onChange={(e) => handlePriceChange("max", e.target.value)}
+                    className="h-9"
+                  />
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
         </div>
       </div>
-
-      {/* Advanced Filters */}
-      {isAdvanced && (
-        <div className="rounded-lg border bg-card/50 p-4">
-          <div className="grid gap-4 sm:grid-cols-2">
-            {/* Stock Filter */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Tồn kho</label>
-              <Select value={filters.stock} onValueChange={handleStockChange}>
-                <SelectTrigger className="h-9 min-w-[150px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tất cả</SelectItem>
-                  <SelectItem value="low">Sắp hết (&lt; 50)</SelectItem>
-                  <SelectItem value="out">Hết hàng</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Hot Products Filter */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Sản phẩm nổi bật</label>
-              <Select value={filters.isHot} onValueChange={handleHotChange}>
-                <SelectTrigger className="h-9 min-w-[150px]">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="all">Tất cả</SelectItem>
-                  <SelectItem value="true">Nổi bật</SelectItem>
-                  <SelectItem value="false">Thường</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            {/* Min Price */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Giá từ</label>
-              <Input
-                type="number"
-                placeholder="0"
-                value={filters.priceRange[0]}
-                onChange={(e) => handlePriceChange("min", e.target.value)}
-                className="h-9"
-              />
-            </div>
-
-            {/* Max Price */}
-            <div className="space-y-2">
-              <label className="text-sm font-medium">Giá đến</label>
-              <Input
-                type="number"
-                placeholder="2000000"
-                value={filters.priceRange[1]}
-                onChange={(e) => handlePriceChange("max", e.target.value)}
-                className="h-9"
-              />
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Active Filters Tags */}
       {hasActiveFilters && (
